@@ -7,9 +7,14 @@ const {
 } = require("../controller/subject-controller");
 const { upload } = require("../utilities/multer");
 
+// router.post(
+//   "/createsubject",
+//   [passport.authenticate("jwt", { session: false }), upload.single("iLink")],
+//   createSubject
+// );
 router.post(
   "/createsubject",
-  [passport.authenticate("jwt", { session: false }), upload.single("iLink")],
+  upload.single("iLink"),
   createSubject
 );
 router.get("/getsubjectbycourse", getSubjectByCourse);

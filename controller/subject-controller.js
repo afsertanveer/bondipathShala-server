@@ -3,7 +3,7 @@ const Course = require("../model/Course");
 const { default: mongoose } = require("mongoose");
 //Create Subject
 const createSubject = async (req, res, next) => {
-  const { courseId, name, descr } = req.body;
+  const { courseId, name, descr } = req.query;
   const file = req.file;
   const courseId1 = courseId;
 
@@ -11,6 +11,7 @@ const createSubject = async (req, res, next) => {
   if (file) {
     iLinkPath = "uploads/".concat(file.filename);
   }
+  console.log("CourseId: ",courseId);
 
   let existingSubject;
   try {
@@ -41,7 +42,7 @@ const createSubject = async (req, res, next) => {
 };
 //get subject by course
 const getSubjectByCourse = async (req, res, next) => {
-  const courseId = req.body.courseId;
+  const courseId = req.query.courseId;
   let courseIdOb;
   try {
     courseIdOb = await Course.findById(courseId).select("_id");
